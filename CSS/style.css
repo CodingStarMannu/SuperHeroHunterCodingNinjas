@@ -1,0 +1,81 @@
+body {
+    background-image: url("/assets/darkbackground.jpg");
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center; 
+    background-attachment: fixed; 
+    min-height: 100vh;
+    margin: 0;
+}
+
+.navbar {
+    padding: 10px;
+    height: auto;
+    background-color: transparent !important;
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    width: 100%;
+}
+
+.navbar .navbar-toggle {
+    margin: 10px 0; /* Adjust as needed */
+}
+
+.navbar .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+.navbar .navbar-brand {
+    padding: 0;
+}
+
+.navbar .navbar-brand img {
+    width: auto;
+    height: 60px;
+    margin-top: -10px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 40vh); /* Adjust for navbar height */
+}
+
+div.input-group {
+    padding-bottom: 0%;
+    max-width: 60vw;
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+input.form-control.search-input {
+    height: 45px;
+    border: none;
+    width: 40vw;
+    border-radius: 5px;
+    padding-left: 15px;
+    background-color: transparent;
+}
+
+div.input-group-addon {
+    background-color: transparent;
+    border: none;
+}
+
+i.fas.fa-search {
+    color: #f0f5fa;
+    padding: 12px;
+    /* background-color: rgb(178, 18, 207); */
+    background-color: transparent;
+
+}
+
+@media (max-width: 768px) {
+    /* Adjust styles for smaller screens */
+    .navbar-brand img {
+        height: 50px;
+    }
+}
+
