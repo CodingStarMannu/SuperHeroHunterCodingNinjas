@@ -1,0 +1,128 @@
+body {
+    background-image: url("/assets/backGround.png");
+    background-size: 70%; 
+    background-repeat: no-repeat;
+    background-position: center bottom ;
+    background-attachment: fixed;
+    min-height: 100vh;
+    background-color: rgb(219, 127, 198);
+}
+
+.navbar {
+    padding: 10px;
+    height: auto;
+    background-color: rgb(188, 116, 174);
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    width: 100%;
+}
+#title{
+    font: 3em Arial;
+    margin-left: 40px;
+}
+.navbar .navbar-toggle {
+    margin: 10px 0; 
+}
+
+.navbar .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+.navbar .navbar-brand {
+    padding: 0;
+}
+
+.navbar .navbar-brand img {
+    width: auto;
+    height: 70px;
+    margin-top: -10px;
+}
+
+
+@media (max-width: 768px) {
+   
+    .navbar-brand img {
+        height: 50px;
+    }
+
+}
+
+div a{
+    color: black;
+    font: 1.7em Arial;
+}
+
+/* Styles for the favorites container */
+.favorites-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.favorites-container h1 {
+  position: absolute;
+  z-index: 1000;
+}
+  /* Styles for each favorite hero card */
+  .favorite-hero-card {
+    background-color: #cc56c2;
+    border: 1px solid #89076a;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    width: 250px;
+    margin-top: 100px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  
+    /* Center text and elements vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .favorite-hero-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .favorite-hero-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .favorite-hero-card .name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  .favorite-hero-card .comics,
+  .favorite-hero-card .series,
+  .favorite-hero-card .stories {
+    font-size: 0.9rem;
+    margin: 5px 0;
+    color: #777;
+  }
+  
+  .favorite-hero-card .remove-favorite {
+    background-color: #ff6347; /* Tomato Red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .favorite-hero-card .remove-favorite:hover {
+    background-color: #d22d00; /* Darker Red */
+  }
+  
+ li::marker{
+list-style-type: none; 
+ }

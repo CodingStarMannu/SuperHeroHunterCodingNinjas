@@ -1,23 +1,26 @@
 body {
-    background-image: url("/assets/darkbackground.jpg");
-    background-size: cover; 
+    background-image: url("/assets/backGround.png");
+    background-size: 70%; 
     background-repeat: no-repeat;
-    background-position: center center; 
-    background-attachment: fixed; 
+    background-position: center bottom ;
+    background-attachment: fixed;
     min-height: 100vh;
-    margin: 0;
+    background-color: rgb(151, 176, 185);
 }
 
 .navbar {
     padding: 10px;
-    height: auto;
-    background-color: transparent !important;
+    height: 62px;
+    background-color: rgb(116, 169, 188);
     border: none;
     box-shadow: none;
     position: absolute;
     width: 100%;
 }
-
+#title{
+    font: 3em Arial;
+    margin-left: 40px;
+}
 .navbar .navbar-toggle {
     margin: 10px 0; /* Adjust as needed */
 }
@@ -32,21 +35,23 @@ body {
 
 .navbar .navbar-brand img {
     width: auto;
-    height: 60px;
+    height: 70px;
     margin-top: -10px;
 }
 
-.search-container {
+div.search-container {
     display: flex;
+    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 40vh); /* Adjust for navbar height */
+    height: calc(100vh - 60vh);
+    margin-bottom: -80px;
 }
 
 div.input-group {
     padding-bottom: 0%;
     max-width: 60vw;
-    background-color: transparent;
+    /* background-color: transparent; */
     border-radius: 5px;
 }
 
@@ -56,26 +61,102 @@ input.form-control.search-input {
     width: 40vw;
     border-radius: 5px;
     padding-left: 15px;
-    background-color: transparent;
+    cursor: text;
+    caret-color: rgb(31, 27, 27);
 }
 
 div.input-group-addon {
-    background-color: transparent;
-    border: none;
+    background-color: rgb(227, 233, 213);
+    border: none;   
+    cursor: pointer;
 }
 
 i.fas.fa-search {
-    color: #f0f5fa;
-    padding: 12px;
-    /* background-color: rgb(178, 18, 207); */
-    background-color: transparent;
+    color: #2a8fb4;
+    font-size: 20px;
 
 }
 
 @media (max-width: 768px) {
-    /* Adjust styles for smaller screens */
-    .navbar-brand img {
-        height: 50px;
-    }
+    #search-bar {
+        min-width: 435px;
+   }
+
+   .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 0;
+        /* height: 30%; */
+   }
+
+   .navbar-brand {
+        display: flex;
+        flex-direction: column;
+
+   }
+
+   .navbar-brand span {
+        margin-top: -35px;
+   }
+
+   .logo {
+        width: 25%;
+        min-width: 45px;
+   }
+
 }
 
+div a{
+    color: black;
+    font: 1.7em Arial;
+}
+
+
+#search-results {
+    display: flex;
+    flex-wrap: wrap; /* Allow multiple results in a row */
+    justify-content: center; /* Center horizontally */
+    list-style: none;
+    padding: 0;
+    margin-left: 25vw;
+    text-align: center;
+    align-items: center; /* Make sure each row has equal height */
+    width: 50vw;
+}
+
+.single-search-result {
+    flex: 0 1 calc(50% - 20px); /* Each card takes up 50% of the container width with some spacing */
+    margin: 10px; /* Add spacing between the cards */
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color:rgb(105, 163, 169)
+}
+
+/* Adjust other styles as needed */
+
+
+.single-search-result img {
+    max-width: 100px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.hero-info {
+    flex: 1;
+    padding: 10px;
+}
+
+.hero-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.single-search-result:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
