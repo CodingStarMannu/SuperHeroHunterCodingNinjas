@@ -32,6 +32,17 @@ async function searchHeros(textSearched){
 }
 
 function showResults(heroList){
+
+
+    let favouritesCharacterIDs = localStorage.getItem("favouritesCharacterIDs");
+    if(favouritesCharacterIDs == null){
+         // If we did't got the favouritesCharacterIDs then we iniitalize it with empty map
+         favouritesCharacterIDs = new Map();
+    }
+    else if(favouritesCharacterIDs != null){
+         // If the we got the favouritesCharacterIDs in localStorage then parsing it and converting it to map
+         favouritesCharacterIDs = new Map(JSON.parse(localStorage.getItem("favouritesCharacterIDs")));
+    }
     searchResults.innerHTML = ``;
     let count = 1;
 
@@ -49,9 +60,9 @@ function showResults(heroList){
          </div>
     </div>
     <div class="flex-col buttons">
-     <button class="btn "><i class="fa-solid fa-circle-info"></i> &nbsp; More Info</button>
-     <button class="add-to-favorite"><i class="fa-solid fa-circle-info "></i> &nbsp; Add To Favorite</button>
-    </div>
+    <!-- <button class="btn"><i class="fa-solid fa-circle-info"></i> &nbsp; More Info</button> -->
+    <button class="btn add-to-fav-btn">${favouritesCharacterIDs.has(`${hero.id}`) ? "<i class=\"fa-solid fa-heart-circle-minus\"></i> &nbsp; Remove from Favourites" :"<i class=\"fa-solid fa-heart fav-icon\"></i> &nbsp; Add to Favourites</button>"}
+</div>
     <div style="display:none;">
          <span>${hero.name}</span>
          <span>${hero.description}</span>

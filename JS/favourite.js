@@ -49,8 +49,12 @@ function displayFavoriteSuperheroes() {
 
         // Customize how the superhero information is displayed
         heroCard.innerHTML = `
+        <div class="hero-info">
+         <a class="character-info" href="./about.html">
+             <span class="hero-name">${hero.name}</span>
+        </a>
+          </div>
             <img src="${hero.thumbnail.portrait}" alt="">
-            <span class="name">${hero.name}</span>
             <span class="comics">Comics : ${hero.comics}</span>
             <span class="series">Series : ${hero.series}</span>
             <span class="stories">Stories : ${hero.stories}</span>

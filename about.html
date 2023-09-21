@@ -7,10 +7,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./CSS/about.css">
 <link rel="icon" href="/assets/icon.png" type="image/png">
 
-    <title>SuperHero Hunter</title>
+    <title id="page-title">SuperHero Hunter</title>
 </head>
 <body>
     <nav class="navbar">
@@ -35,17 +35,57 @@
             </div>
         </div>
     </nav>
+    <div class="flex-row info">
+        <section class="flex-col" id="info-container">
+             <!-- Sturcture of the data that is added to favourites using DOM manipulation -->
+             <!-- <div class="flex-row hero-name">${heroInfo.name}</div>
+             <div class="flex-row hero-img-and-more-info">
+                  <img id="portraitImage" class="hero-img" src="${heroInfo.portraitImage}" alt="">
+                  <img style="display:none;" id="landscapeImage" src="${heroInfo.landscapeImage}" alt="">
+                  <div class="flex-col more-info">
+                       <div class="flex-row id">
+                            <b>ID:</b><span>${heroInfo.id}</span>
+                       </div>
+                       <div class="flex-row comics">
+                            <b>Comics:</b><span>${heroInfo.comics}</span>
+                       </div>
+                       <div class="flex-row series">
+                            <b>Series:</b><span>${heroInfo.series}</span>
+                       </div>
+                       <div class="flex-row stories">
+                            <b>Stories:</b><span>${heroInfo.stories}</span>
+                       </div>
+                  </div>
+             </div>
+             <div class="flex-col hero-discription">
+                  <b>Discription:</b>
+                  <p>${heroInfo.description != "" ? heroInfo.description : "No Description Available"}</p>
+             </div>
+             <div style="display:none;">
+                  <span>${heroInfo.name}</span>
+                  <span>${heroInfo.portraitImage}</span>
+                  <span>${heroInfo.landscapeImage}</span>
+                  <span>${heroInfo.id}</span>
+                  <span>${heroInfo.comics}</span>
+                  <span>${heroInfo.series}</span>
+                  <span>${heroInfo.stories}</span>
+                  <span>${heroInfo.squareImage}</span>
+                  <span>${heroInfo.description}</span>
+             </div>
+             <button class="btn add-to-fav-btn">${favouritesCharacterIDs.has(`${heroInfo.id}`) ? "<i class=\"fa-solid fa-heart-circle-minus\"></i> &nbsp; Remove from Favourites" :"<i class=\"fa-solid fa-heart fav-icon\"></i> &nbsp; Add to Favourites</button>"} -->
+        </section>
+   </div>
+
+   
+   <!-- Toasts for notifying user that character is added or removed from favourites -->
+   <span data-visiblity="hide" class="fav-toast">Added to Favourites</span>
+   <span data-visiblity="hide" class="remove-toast">Removed from Favourites</span>
+
     
-    <div class="search-container">
-        <div class="input-group">
-            <input type="text" class="form-control search-input" placeholder="Search superheroes...">
-            <div class="input-group-addon">
-                <i class="fas fa-search"></i>
-            </div>
-        </div>
-    </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="JS/about.js"></script>
 </body>
 </html>

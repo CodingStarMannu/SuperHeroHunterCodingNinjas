@@ -1,0 +1,74 @@
+body {
+    background-image: url("/assets/backGround.png");
+    background-size: 70%; 
+    background-repeat: no-repeat;
+    background-position: center bottom ;
+    background-attachment: fixed;
+    min-height: 100vh;
+    background-color: rgb(151, 176, 185);
+}
+
+.navbar {
+    padding: 10px;
+    height: 62px;
+    background-color: rgb(116, 169, 188);
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    width: 100%;
+}
+#title{
+    font: 3em Arial;
+    margin-left: 40px;
+}
+.navbar .navbar-toggle {
+    margin: 10px 0; /* Adjust as needed */
+}
+
+.navbar .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+.navbar .navbar-brand {
+    padding: 0;
+}
+
+.navbar .navbar-brand img {
+    width: auto;
+    height: 70px;
+    margin-top: -10px;
+}
+
+@media (max-width: 768px) {
+    #search-bar {
+        min-width: 435px;
+   }
+
+   .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 0;
+        /* height: 30%; */
+   }
+
+   .navbar-brand {
+        display: flex;
+        flex-direction: column;
+
+   }
+
+   .navbar-brand span {
+        margin-top: -35px;
+   }
+
+   .logo {
+        width: 25%;
+        min-width: 45px;
+   }
+
+}
+
+div a{
+    color: black;
+    font: 1.7em Arial;
+}
