@@ -68,3 +68,7 @@ function displayFavoriteSuperheroes() {
 
 // Call the displayFavoriteSuperheroes function to initially populate the favorites page
 displayFavoriteSuperheroes();
+
+
+
+

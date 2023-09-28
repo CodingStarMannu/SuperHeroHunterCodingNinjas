@@ -5,13 +5,13 @@ body {
     background-position: center bottom ;
     background-attachment: fixed;
     min-height: 100vh;
-    background-color: rgb(151, 176, 185);
+    background-color: rgb(116, 198, 235);
 }
 
 .navbar {
     padding: 10px;
     height: 62px;
-    background-color: rgb(116, 169, 188);
+    background-color: rgb(52, 175, 231);
     border: none;
     box-shadow: none;
     position: absolute;
@@ -41,7 +41,6 @@ body {
 
 div.search-container {
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
     height: calc(100vh - 60vh);
@@ -51,7 +50,6 @@ div.search-container {
 div.input-group {
     padding-bottom: 0%;
     max-width: 60vw;
-    /* background-color: transparent; */
     border-radius: 5px;
 }
 
@@ -66,7 +64,7 @@ input.form-control.search-input {
 }
 
 div.input-group-addon {
-    background-color: rgb(227, 233, 213);
+    background-color: rgb(213, 227, 233);
     border: none;   
     cursor: pointer;
 }
@@ -133,14 +131,14 @@ div a{
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    background-color:rgb(105, 163, 169)
+    background-color:rgb(26, 140, 181)
 }
 
 /* Adjust other styles as needed */
 
 
-.single-search-result img {
-    max-width: 100px;
+.flex-row .single-search-result img {
+    width: 20vw;
     height: auto;
     margin-right: 10px;
 }
@@ -160,3 +158,29 @@ div a{
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+
+/* Style for the "Add to Favorite" button */
+.add-to-favorite {
+    background-color: #ca26ba;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+    border-radius: 50px;
+}
+
+.add-to-favorite:hover {
+    background-color: #b300a4;
+}
+
+
+/* Define a class for the "Add to Favorite" button when in favorites */
+.add-to-favorite.added {
+    background-color: rgb(236, 73, 73); 
+    color: #fff; 
+
+}
+

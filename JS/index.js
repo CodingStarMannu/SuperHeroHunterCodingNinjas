@@ -27,71 +27,91 @@ async function searchHeros(textSearched){
    const api = await fetch(`https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${textSearched}&limit=10&apikey=9ab871748d83ae2eb5527ffd69e034de&hash=d35377547e551cd64a60657d2517bb7f?ts=1`)
    .then(res => res.json()) //Converting the data into JSON format
    .then(data => showResults (data.data.results));
-  console.log(api);
    
 }
 
-function showResults(heroList){
 
 
-    let favouritesCharacterIDs = localStorage.getItem("favouritesCharacterIDs");
-    if(favouritesCharacterIDs == null){
-         // If we did't got the favouritesCharacterIDs then we iniitalize it with empty map
-         favouritesCharacterIDs = new Map();
-    }
-    else if(favouritesCharacterIDs != null){
-         // If the we got the favouritesCharacterIDs in localStorage then parsing it and converting it to map
-         favouritesCharacterIDs = new Map(JSON.parse(localStorage.getItem("favouritesCharacterIDs")));
-    }
+
+function showResults(heroList) {
     searchResults.innerHTML = ``;
     let count = 1;
 
     heroList.map(hero => {
-        
-    if(count <= 8){
-    searchResults.innerHTML += `
-    <li class="flex-row single-search-result">
-    <div class="flex-row img-info">
-         <img src="${hero.thumbnail.path+'/portrait_medium.' + hero.thumbnail.extension}" alt="">
-         <div class="hero-info">
-              <a class="character-info" href="./about.html">
-                   <span class="hero-name">${hero.name}</span>
-              </a>
-         </div>
-    </div>
-    <div class="flex-col buttons">
-    <!-- <button class="btn"><i class="fa-solid fa-circle-info"></i> &nbsp; More Info</button> -->
-    <button class="btn add-to-fav-btn">${favouritesCharacterIDs.has(`${hero.id}`) ? "<i class=\"fa-solid fa-heart-circle-minus\"></i> &nbsp; Remove from Favourites" :"<i class=\"fa-solid fa-heart fav-icon\"></i> &nbsp; Add to Favourites</button>"}
-</div>
-    <div style="display:none;">
-         <span>${hero.name}</span>
-         <span>${hero.description}</span>
-         <span>${hero.comics.available}</span>
-         <span>${hero.series.available}</span>
-         <span>${hero.stories.available}</span>
-         <span>${hero.thumbnail.path+'/portrait_uncanny.' + hero.thumbnail.extension}</span>
-         <span>${hero.id}</span>
-         <span>${hero.thumbnail.path+'/landscape_incredible.' + hero.thumbnail.extension}</span>
-         <span>${hero.thumbnail.path+'/standard_fantastic.' + hero.thumbnail.extension}</span>
-    </div>
-</li> 
-    `}
-    count++;
-})
+        if (count <= 8) {
+            // Check if the hero is in favorites
+            const isHeroFavorite = isHeroInFavorites(hero.name);
+
+            searchResults.innerHTML += `
+                <li class="flex-row single-search-result">
+                    <div class="flex-row img-info">
+                        <img src="${hero.thumbnail.path + '/portrait_medium.' + hero.thumbnail.extension}" alt="">
+                        <div class="hero-info">
+                            <a class="character-info" href="./about.html">
+                                <span class="hero-name">${hero.name}</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex-col buttons">
+                    <button class="add-to-favorite ${isHeroFavorite ? 'added' : ''}" data-hero-name="${hero.name}">
+                    ${isHeroFavorite ? "Remove from Favorites" : "Add to Favorite"}
+                     </button>
+              </div>
+                    <div style="display:none;">
+                        <span>${hero.name}</span>
+                        <span>${hero.description}</span>
+                        <span>${hero.comics.available}</span>
+                        <span>${hero.series.available}</span>
+                        <span>${hero.stories.available}</span>
+                        <span>${hero.thumbnail.path + '/portrait_uncanny.' + hero.thumbnail.extension}</span>
+                        <span>${hero.id}</span>
+                        <span>${hero.thumbnail.path + '/landscape_incredible.' + hero.thumbnail.extension}</span>
+                        <span>${hero.thumbnail.path + '/standard_fantastic.' + hero.thumbnail.extension}</span>
+                    </div>
+                </li>
+            `;
+                // Update the button when rendering
+        const addButton = searchResults.querySelector(`.add-to-favorite[data-hero-name="${hero.name}"]`);
+        updateFavoriteButton(hero.name, addButton, isHeroFavorite);
+        }
+        count++;
+    });
+  events();
 }
 
 
+// Check if a hero is in favorites
+function isHeroInFavorites(heroName) {
+    return favoriteHeroes.some(hero => hero.name === heroName);
+}
 
-searchResults.addEventListener("click", (event) =>{
+// Function to update the "Add to Favorite" button text
+function updateFavoriteButton(heroName, button, isHeroFavorite) {
+    button.textContent = isHeroFavorite ? "Remove from Favorites" : "Add to Favorite";
+    
+    if (isHeroFavorite) {
+        button.classList.add("added"); // Add the "added" class when in favorites
+    } else {
+        button.classList.remove("added"); // Remove the "added" class when not in favorites
+    }
+}
+// Add a click event listener to the document to handle the "Add to Favorite" button
+document.addEventListener("click", (event) => {
+    const target = event.target;    
+// Inside the click event listener for "Add to Favorite" button
+if (target.classList.contains("add-to-favorite")) {   
+    const heroInfoDiv = target.parentElement.parentElement.querySelector("div[style='display:none;']");
+    const heroName = heroInfoDiv.querySelector("span:nth-child(1)").textContent;
+    const isHeroFavorite = isHeroInFavorites(heroName);
 
-    const target = event.target;
-    console.log(target);
-
-    if(target.classList.contains("add-to-favorite")){
-
-        
-        const heroInfoDiv = target.parentElement.parentElement.querySelector("div[style='display:none;']");
-
+    if (isHeroFavorite) {
+        // Remove the hero from favorites
+        favoriteHeroes = favoriteHeroes.filter(hero => hero.name !== heroName);
+        localStorage.setItem('favorite-hero-list', JSON.stringify(favoriteHeroes));
+        updateFavoriteButton(heroName, target, false);
+        alert(`${heroName} removed from favorites!`);
+    } else {
+        // Use the hero object from the clicked button's data attributes
         const hero = {
            
             name: heroInfoDiv.querySelector("span:nth-child(1)").textContent,
@@ -107,16 +127,42 @@ searchResults.addEventListener("click", (event) =>{
                         },
                     };
 
-          favoriteHeroes.push(hero);
-          localStorage.setItem('favorite-hero-list',JSON.stringify(favoriteHeroes));
-          console.log("inside hero");
-          console.log(favoriteHeroes);
-
-
-          alert(`${hero.name} added to favorites!`);
+        // Add the hero to favorites
+        favoriteHeroes.push(hero);
+        localStorage.setItem('favorite-hero-list', JSON.stringify(favoriteHeroes));
+        updateFavoriteButton(heroName, target, true);
+        alert(`${heroName} added to favorites!`);
     }
+}
+
 });
 
 
+function addInfoInLocalStorage() {
 
+    // This function basically stores the data of character in localStorage.
+    // When user clicks on the info button and when the info page is opened that page fetches the heroInfo and display the data  
+    let heroInfo = {
+         name: this.parentElement.parentElement.parentElement.children[2].children[0].innerHTML,
+         description: this.parentElement.parentElement.parentElement.children[2].children[1].innerHTML,
+         comics: this.parentElement.parentElement.parentElement.children[2].children[2].innerHTML,
+         series: this.parentElement.parentElement.parentElement.children[2].children[3].innerHTML,
+         stories: this.parentElement.parentElement.parentElement.children[2].children[4].innerHTML,
+         portraitImage: this.parentElement.parentElement.parentElement.children[2].children[5].innerHTML,
+         id: this.parentElement.parentElement.parentElement.children[2].children[6].innerHTML,
+         landscapeImage: this.parentElement.parentElement.parentElement.children[2].children[7].innerHTML,
+         squareImage: this.parentElement.parentElement.parentElement.children[2].children[8].innerHTML
+    }
+console.log("Inside addInfoInLocalStorage");
+
+
+    localStorage.setItem("heroInfo", JSON.stringify(heroInfo));
+    
+}
+
+function events() {
+
+    let characterInfo = document.querySelectorAll(".character-info");
+    characterInfo.forEach((character) => character.addEventListener("click", addInfoInLocalStorage))
+}
 
