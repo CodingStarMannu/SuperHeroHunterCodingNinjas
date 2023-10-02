@@ -107,7 +107,7 @@ if (target.classList.contains("add-to-favorite")) {
     if (isHeroFavorite) {
         // Remove the hero from favorites
         favoriteHeroes = favoriteHeroes.filter(hero => hero.name !== heroName);
-        localStorage.setItem('favorite-hero-list', JSON.stringify(favoriteHeroes));
+        localStorage.setItem('favorite-heroes', JSON.stringify(favoriteHeroes));
         updateFavoriteButton(heroName, target, false);
         alert(`${heroName} removed from favorites!`);
     } else {
@@ -129,7 +129,7 @@ if (target.classList.contains("add-to-favorite")) {
 
         // Add the hero to favorites
         favoriteHeroes.push(hero);
-        localStorage.setItem('favorite-hero-list', JSON.stringify(favoriteHeroes));
+        localStorage.setItem('favorite-heroes', JSON.stringify(favoriteHeroes));
         updateFavoriteButton(heroName, target, true);
         alert(`${heroName} added to favorites!`);
     }

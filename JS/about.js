@@ -4,20 +4,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Get hero info from local storage
     const heroInfo = JSON.parse(localStorage.getItem("heroInfo"));
+    const favoriteHeroes = JSON.parse(localStorage.getItem("favorite-heroes")) || [];
 
-    // Check if the hero is in favorites
-    const favoritesCharacterIDs = new Map(
-        JSON.parse(localStorage.getItem("favouritesCharacterIDs"))
-    );
+    // Check if the displayed superhero is in your favorites
+    const isHeroInFavorites = favoriteHeroes.some((hero) => hero.name === heroInfo.name);
 
-    // Check if the hero is in favorites
-    const isHeroFavorite = heroInfo && heroInfo.id ? favoritesCharacterIDs.has(heroInfo.id) : false;
+   
 
-     // Update the page title
-     document.title = `${heroInfo.name} | SuperHero Hunter`;
+    // Update the page title
+    document.title = `${heroInfo.name} | SuperHero Hunter`;
 
     // Display hero information
     infoContainer.innerHTML = `
+    <div class="flex-row hero-name"><h1>SuperHero Info</h1></div>
         <div class="flex-row hero-name">${heroInfo.name}</div>
         <div class="flex-row hero-img-and-more-info">
             <img id="portraitImage" class="hero-img" src="${heroInfo.portraitImage}" alt="">
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="flex-row id">
                     <b>ID:</b><span>${heroInfo.id}</span>
                 </div>
-                <div class="flex-row comics">
+                <div class "flex-row comics">
                     <b>Comics:</b><span>${heroInfo.comics}</span>
                 </div>
                 <div class="flex-row series">
@@ -52,48 +51,28 @@ document.addEventListener("DOMContentLoaded", function () {
             <span>${heroInfo.squareImage}</span>
             <span>${heroInfo.description}</span>
         </div>
-        <button class="add-to-fav-btn">${isHeroFavorite ? "Remove from Favorites" : "Add to Favorites"}</button>
+       
     `;
 
-    // Add event listener to the "Add to Favorites" button
-    favoriteButton.addEventListener("click", () => {
-        if (isHeroFavorite) {
-            // Remove hero from favorites
-        console.log("Button clicked");
+     // Update the "Add to Favorites" button text based on whether the hero is in favorites
+    favoriteButton.textContent = isHeroInFavorites ? "Remove from Favorites" : "Add to Favorites";
 
-            removeFromFavorites(heroInfo, favoritesCharacterIDs, favoriteButton);
+    // Add an event listener to the "Add to Favorites" button
+    favoriteButton.addEventListener("click", function () {
+        if (isHeroInFavorites) {
+            // Remove the hero from favorites
+            const updatedFavorites = favoriteHeroes.filter((hero) => hero.name !== heroInfo.name);
+            localStorage.setItem("favorite-heroes", JSON.stringify(updatedFavorites));
+            favoriteButton.textContent = "Add to Favorites";
         } else {
-            // Add hero to favorites
-            addToFavorites(heroInfo, favoritesCharacterIDs, favoriteButton);
+            // Add the hero to favorites
+            favoriteHeroes.push(heroInfo);
+            localStorage.setItem("favorite-heroes", JSON.stringify(favoriteHeroes));
+            favoriteButton.textContent = "Remove from Favorites";
         }
-        isHeroFavorite = !isHeroFavorite; // Toggle favorite status
+        // Toggle the isHeroInFavorites flag
+        isHeroInFavorites = !isHeroInFavorites;
     });
 });
 
-// Function to add hero to favorites
-function addToFavorites(heroInfo, favoritesCharacterIDs, favoriteButton) {
-    const favoritesArray = JSON.parse(localStorage.getItem("favouriteCharacters")) || [];
-    favoritesArray.push(heroInfo);
 
-    favoritesCharacterIDs.set(heroInfo.id, true);
-    localStorage.setItem("favouritesCharacterIDs", JSON.stringify([...favoritesCharacterIDs]));
-    localStorage.setItem("favouriteCharacters", JSON.stringify(favoritesArray));
-
-    favoriteButton.textContent = "Remove from Favorites";
-}
-
-// Function to remove hero from favorites
-function removeFromFavorites(heroInfo, favoritesCharacterIDs, favoriteButton) {
-    const favoritesArray = JSON.parse(localStorage.getItem("favouriteCharacters")) || [];
-
-    const index = favoritesArray.findIndex((hero) => hero.id === heroInfo.id);
-    if (index !== -1) {
-        favoritesArray.splice(index, 1);
-    }
-
-    favoritesCharacterIDs.delete(heroInfo.id);
-    localStorage.setItem("favouritesCharacterIDs", JSON.stringify([...favoritesCharacterIDs]));
-    localStorage.setItem("favouriteCharacters", JSON.stringify(favoritesArray));
-
-    favoriteButton.textContent = "Add to Favorites";
-}
