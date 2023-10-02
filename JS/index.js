@@ -3,7 +3,7 @@
     // let PUBLIC_KEY = "9c275330f543532cccc32d2b2111c6e3";
     // let PRIVATE_KEY = "52c358d40f1080d12d695a6bb74d2dc18afa0150";
 
-    //  let ts = new Date().getTime();
+    //  let ts = new Date().getTime();s
     //  let hash = CryptoJS.MD5(ts + PRIVATE_KEY + PUBLIC_KEY).toString();
     //  console.log(MD5(hash).toString());
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------
