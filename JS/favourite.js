@@ -44,9 +44,7 @@ function displayFavoriteSuperheroes() {
         // Customize how the superhero information is displayed
         heroCard.innerHTML = `
             <div class="hero-info">
-                <a class="character-info" href="./about.html">
                     <span class="hero-name">${hero.name}</span>
-                </a>
             </div>
             <img src="${hero.thumbnail.portrait}" alt="">
             <span class="comics">Comics : ${hero.comics}</span>
@@ -54,6 +52,7 @@ function displayFavoriteSuperheroes() {
             <span class="stories">Stories : ${hero.stories}</span>
             <button class="btn remove-favorite" data-id="${hero.name}">Remove from Favorites</button>
         `;
+        console.log(hero);
 
         // Add the hero card to the favorites container
         favoritesContainer.appendChild(heroCard);
@@ -62,4 +61,5 @@ function displayFavoriteSuperheroes() {
 
 // Call the displayFavoriteSuperheroes function to initially populate the favorites page
 displayFavoriteSuperheroes();
+
 

@@ -1,5 +1,5 @@
 body {
-    background-image: url("assets/backGround.png");
+    background-image: url("/assets/backGround.png");
     background-size: 70%;
     background-repeat: no-repeat;
     background-position: center bottom;

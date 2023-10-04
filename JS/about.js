@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const infoContainer = document.getElementById("info-container");
     const favoriteButton = document.querySelector(".add-to-fav-btn");
